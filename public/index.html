@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Parachute</title>
+<meta name="description" content="A co-op party game for a big screen and phones. The TV shows a playground parachute and every phone is one handle: tilt to lift your edge, flick to send a wave, and launch balls through hoops together.">
+<meta name="theme-color" content="#0b0f2c">
+<meta property="og:title" content="Parachute">
+<meta property="og:description" content="One big parachute on the TV, every phone a handle. Tilt to lift, flick to wave, and work together to launch balls through hoops.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0f2c'/%3E%3Cpath d='M8 38a24 20 0 0 1 48 0z' fill='%23ffd23f'/%3E%3Cpath d='M8 38a24 20 0 0 1 16-18.8L32 38z' fill='%23ff4f6d'/%3E%3Cpath d='M32 38l8-18.8A24 20 0 0 1 56 38z' fill='%2331c6f0'/%3E%3Cpath d='M24 19.2a24 20 0 0 1 16 0L32 38z' fill='%235fdc7f'/%3E%3Ccircle cx='32' cy='11' r='5' fill='%23fff'/%3E%3Cpath d='M10 38v8M32 38v8M54 38v8' stroke='%23c9cde6' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+<a class="hub-link" href="https://play.jadon.me/"><span aria-hidden="true">←</span> All games</a>
+
+<!-- ═════════════════════════ PHONE (a handle) ═════════════════════════ -->
+<main id="phone" class="app">
+
+  <section id="scr-home" class="screen home">
+    <div class="home-in">
+      <div class="home-art" aria-hidden="true">
+        <svg viewBox="0 0 320 210">
+          <defs>
+            <radialGradient id="ha-glow" cx=".5" cy=".55" r=".55"><stop offset="0" stop-color="#ffd27a" stop-opacity=".45"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+            <radialGradient id="ha-ball" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#cfd6ff"/></radialGradient>
+          </defs>
+          <ellipse cx="160" cy="132" rx="150" ry="62" fill="url(#ha-glow)"/>
+          <g class="canopy">
+            <path d="M30 128 Q 160 40 290 128 Q 225 150 160 152 Q 95 150 30 128Z" fill="#1a1f52"/>
+            <path class="w" d="M30 128 Q 70 92 104 80 L 160 150 Q 95 150 30 128Z" fill="#ff4f6d"/>
+            <path class="w" d="M104 80 Q 132 70 160 69 L 160 150Z" fill="#ffd23f"/>
+            <path class="w" d="M160 69 Q 190 70 216 80 L 160 150Z" fill="#5fdc7f"/>
+            <path class="w" d="M216 80 Q 252 92 290 128 Q 225 150 160 150Z" fill="#31c6f0"/>
+            <path d="M30 128 Q 160 40 290 128" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+            <path d="M30 128 Q 95 152 160 152 Q 225 152 290 128" fill="none" stroke="#c9cde6" stroke-width="3"/>
+          </g>
+          <circle class="ball" cx="160" cy="40" r="15" fill="url(#ha-ball)"/>
+          <path class="ball-sh" d="M150 112 h20" stroke="#000" stroke-opacity=".3" stroke-width="5" stroke-linecap="round"/>
+          <g class="hands" stroke="#c9cde6" stroke-width="3" stroke-linecap="round">
+            <path d="M30 128 v18"/><path d="M95 148 v18"/><path d="M160 152 v18"/><path d="M225 148 v18"/><path d="M290 128 v18"/>
+          </g>
+          <g class="dots">
+            <circle cx="30" cy="150" r="8" fill="#ff5470"/><circle cx="95" cy="170" r="8" fill="#ffb020"/><circle cx="160" cy="174" r="8" fill="#3ee0a0"/><circle cx="225" cy="170" r="8" fill="#45b7ff"/><circle cx="290" cy="150" r="8" fill="#b07cff"/>
+          </g>
+        </svg>
+      </div>
+      <h1 class="logo" id="home-logo" aria-label="Parachute">PARACHUTE</h1>
+      <p class="pitch">One big parachute on the TV, and <b>your phone is a handle.</b> Tip it up to lift your edge, flick it to send a wave, and launch the ball together.</p>
+
+      <form id="f-home" class="home-form" autocomplete="off">
+        <label class="sr" for="in-name">Your name</label>
+        <input id="in-name" maxlength="14" placeholder="Your name" spellcheck="false" autocomplete="nickname" enterkeyhint="next">
+        <div class="join-row">
+          <label class="sr" for="in-code">Room code</label>
+          <input id="in-code" class="code-in" maxlength="4" placeholder="CODE" spellcheck="false" autocapitalize="characters" autocomplete="off" enterkeyhint="go">
+          <button class="btn primary" type="submit" id="btn-join">Join</button>
+        </div>
+      </form>
+
+      <div class="tv-tip">
+        <p><b>Needs a big screen.</b> Open <span class="mono">play.jadon.me/parachute</span> on a TV or laptop, then scan its code with each phone.</p>
+        <a class="btn ghost small" href="?tv">Use this screen as the big screen</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="scr-grab" class="screen grab">
+    <header class="bar">
+      <button class="chip ghost" id="grab-leave" type="button"><span aria-hidden="true">←</span> Leave</button>
+      <span class="room-id"><span class="lbl">Room</span><b id="grab-code">····</b></span>
+    </header>
+    <div class="grab-in">
+      <div class="grab-who"><span id="grab-av"></span><p>You're <b id="grab-name">Player</b>. Find your name by the parachute on the big screen.</p></div>
+      <div class="grab-art" aria-hidden="true">
+        <svg viewBox="0 0 220 170">
+          <path d="M20 150 H200" stroke="#ffffff" stroke-opacity=".15" stroke-width="2"/>
+          <g class="tilt-phone">
+            <rect x="92" y="38" width="44" height="86" rx="9" fill="#151a46" stroke="var(--me)" stroke-width="3"/>
+            <rect x="99" y="48" width="30" height="64" rx="4" fill="#232a68"/>
+            <rect x="103" y="78" width="22" height="30" rx="3" fill="var(--me)" class="tilt-fill"/>
+          </g>
+          <path class="arc-up" d="M150 104 A 52 52 0 0 0 132 50" fill="none" stroke="#ffd23f" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow)"/>
+          <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#ffd23f"/></marker></defs>
+        </svg>
+      </div>
+      <ul class="how">
+        <li><b>Tip it up</b> to lift your edge of the parachute</li>
+        <li><b>Lay it flat</b> to bring your edge down low</li>
+        <li><b>Flick it</b> (a quick jerk) to snap a wave across</li>
+      </ul>
+      <button class="btn primary big" id="btn-grab" type="button">Grab the handle</button>
+      <button class="btn link" id="btn-touch" type="button">No motion sensors? Use touch controls</button>
+      <p class="fine">Motion is read on this phone only. Nothing but your handle's height is sent.</p>
+    </div>
+  </section>
+
+  <section id="scr-ctrl" class="screen ctrl">
+    <header class="bar c-head">
+      <span class="c-me"><span id="c-av"></span><span id="c-name"></span></span>
+      <span class="room-id"><span class="lbl">Room</span><b id="c-code">····</b></span>
+      <button class="chip" id="c-menu-btn" type="button" aria-label="Menu">•••</button>
+    </header>
+    <div class="c-status">
+      <div class="c-row"><span id="c-lv">Lobby</span><span id="c-time" class="mono"></span><span id="c-prog"></span></div>
+      <p id="c-goal" class="c-goal"></p>
+    </div>
+    <div class="c-main">
+      <div class="gauge" id="gauge" role="slider" aria-label="Handle height" aria-valuemin="0" aria-valuemax="100">
+        <div class="g-track"><div class="g-fill"></div></div>
+        <div class="g-actual" aria-hidden="true"></div>
+        <div class="g-knob" aria-hidden="true"><span></span></div>
+        <span class="g-lbl top">Lift</span>
+        <span class="g-lbl bot">Low</span>
+      </div>
+      <div class="c-side">
+        <canvas id="minimap" aria-label="The parachute from where you stand"></canvas>
+        <p class="c-mode" id="c-mode">Tilt to lift · flick to wave</p>
+        <div class="c-cue" id="c-cue" hidden></div>
+      </div>
+    </div>
+    <div class="c-call" id="c-call" aria-live="assertive"></div>
+    <button class="flick" id="btn-flick" type="button"><span class="f-ic" aria-hidden="true">〰</span> Flick <small>or flick your phone</small></button>
+    <footer class="c-foot" id="c-foot"></footer>
+
+    <div class="c-res" id="c-res" hidden>
+      <p class="kicker" id="r-k"></p>
+      <h2 id="r-title"></h2>
+      <div class="stars big" id="r-stars"></div>
+      <p class="r-auto" id="r-auto"></p>
+      <div class="r-btns" id="r-btns"></div>
+    </div>
+
+    <div class="c-wait" id="c-wait" hidden><div class="spinner"></div><p id="c-wait-t">Waiting for the big screen…</p></div>
+
+    <div class="c-menu" id="c-menu" hidden>
+      <div class="m-card">
+        <button class="btn ghost" id="m-recenter" type="button">Re-centre tilt (this angle = middle)</button>
+        <button class="btn ghost" id="m-reset" type="button">Reset tilt range</button>
+        <button class="btn ghost" id="m-mode" type="button">Use touch controls instead</button>
+        <button class="btn ghost danger" id="m-leave" type="button">Leave the room</button>
+        <button class="btn link" id="m-close" type="button">Close</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ═════════════════════════ BIG SCREEN ═════════════════════════ -->
+<main id="tv" class="tv" hidden>
+  <canvas id="gl"></canvas>
+  <div id="badges" class="badges" aria-hidden="true"></div>
+
+  <section id="tv-lobby" class="tv-lobby on">
+    <h1 class="logo tvlogo" id="tv-logo" aria-label="Parachute">PARACHUTE</h1>
+    <p class="tv-pitch">The parachute is on this screen, and <b>every phone is a handle.</b> Tip your phones up to lift, flick them to send a wave, and launch the ball together.</p>
+    <div class="join-card">
+      <div class="qr" id="tv-qr"></div>
+      <div class="join-text">
+        <p class="lbl">Scan with your phone, or go to</p>
+        <p class="url" id="tv-url">play.jadon.me/parachute</p>
+        <p class="lbl">and enter</p>
+        <p class="code" id="tv-code">····</p>
+      </div>
+    </div>
+    <div class="tv-people">
+      <h2 class="tv-h">Handles <span id="tv-count"></span></h2>
+      <ul class="tv-players" id="tv-players"></ul>
+      <p class="tv-empty" id="tv-empty">Nobody's holding on yet.</p>
+    </div>
+    <p class="tv-hint" id="tv-hint"></p>
+    <div class="tv-actions">
+      <button class="btn primary big" id="tv-start" type="button" disabled>Waiting for handles…</button>
+    </div>
+    <div class="tiles-wrap">
+      <p class="lbl">Or jump to a level</p>
+      <div class="tiles" id="tv-tiles"></div>
+    </div>
+  </section>
+
+  <div class="tv-tools">
+    <button class="chip" id="tv-sound" type="button">Tap for sound</button>
+    <button class="chip" id="tv-fs" type="button" title="Full screen (F)">Full screen</button>
+  </div>
+
+  <header class="hud" id="hud">
+    <div class="hud-lv">
+      <p class="k" id="hud-k">Level 1 / 8</p>
+      <h2 id="hud-name">Lift Off</h2>
+      <p class="g" id="hud-goal"></p>
+    </div>
+    <div class="hud-prog" id="hud-prog">
+      <p class="pv"><b id="hud-cur">0</b><span class="sl">/</span><span id="hud-need">3</span> <em id="hud-unit">hoops</em></p>
+      <div class="bar"><b id="hud-bar"></b><span class="marks" id="hud-marks"></span></div>
+    </div>
+    <div class="hud-time" id="hud-time">
+      <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="trk" cx="18" cy="18" r="15.9"/><circle class="arc" id="hud-ring" cx="18" cy="18" r="15.9" pathLength="100"/></svg>
+      <span class="mono" id="hud-clock">1:10</span>
+    </div>
+    <button class="chip ghost hud-menu" id="hud-menu" type="button">Menu</button>
+  </header>
+  <div class="hud-wind" id="hud-wind" hidden><span class="lbl">Wind</span><span class="arrow" id="hud-wind-arrow">➜</span><i><b id="hud-wind-str"></b></i></div>
+
+  <div class="call" id="tv-call" aria-live="polite"></div>
+
+  <div class="card intro" id="tv-intro" hidden>
+    <p class="kicker" id="intro-k">Level 1 of 8</p>
+    <h2 id="intro-name">Lift Off</h2>
+    <p class="goal" id="intro-goal"></p>
+    <p class="tip" id="intro-tip"></p>
+    <p class="count" id="intro-count"></p>
+  </div>
+
+  <div class="card result" id="tv-result" hidden>
+    <p class="kicker" id="res-k"></p>
+    <h2 id="res-title"></h2>
+    <div class="stars big" id="res-stars"></div>
+    <p class="stat" id="res-stat"></p>
+    <p class="hint" id="res-hint"></p>
+    <div class="btns">
+      <button class="btn primary" id="res-next" type="button">Next level</button>
+      <button class="btn ghost" id="res-retry" type="button">Try again</button>
+      <button class="btn link" id="res-menu" type="button">Menu</button>
+    </div>
+    <p class="auto" id="res-auto"></p>
+  </div>
+
+  <div class="card end" id="tv-end" hidden>
+    <p class="kicker">Every level done</p>
+    <h2 id="end-title">What a team!</h2>
+    <p class="total"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg><span id="end-total">0 / 24</span></p>
+    <ol class="end-list" id="end-list"></ol>
+    <div class="btns">
+      <button class="btn primary" id="end-again" type="button">Play again</button>
+      <button class="btn ghost" id="end-menu" type="button">Menu</button>
+    </div>
+  </div>
+
+  <div class="joinchip" id="joinchip">Join: <span id="chip-url">play.jadon.me/parachute</span> · <b id="chip-code">····</b></div>
+
+  <div class="nogl" id="tv-nogl" hidden>
+    <h2>This screen can't draw the parachute</h2>
+    <p>It needs WebGL. Try a recent Chrome, Edge, Firefox or Safari on a laptop, or turn hardware acceleration back on.</p>
+  </div>
+</main>
+
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script src="vendor/qrcode.js"></script>
+<script type="module" src="js/main.js?v=1"></script>
+</body>
+</html>

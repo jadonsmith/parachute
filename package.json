@@ -1,0 +1,17 @@
+{
+  "name": "parachute",
+  "version": "1.0.0",
+  "description": "Parachute: a co-op big-screen party game. The TV shows a playground parachute and every phone is one handle. Tilt to lift your edge, flick to send a wave, and launch balls through hoops together.",
+  "main": "server.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/server.js && node test/levels.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "qrcode-generator": "^1.5.2",
+    "ws": "^8.23.0"
+  }
+}
